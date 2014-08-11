@@ -1,4 +1,105 @@
+<html>
+<head>
+
+ <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+<style>
+body
+{
+  background-color: #000;
+  padding: 1%;
+  color: #ccc;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 1em;
+}
+
+.console
+{
+  font-family: "Lucida Sans Typewriter", "Lucida Console", Monaco, "Bitstream Vera Sans Mono", monospace;
+}
+
+input[type="button"]
+{
+  cursor: pointer;
+}
+
+</style>
+<script>
+
+var captionLength = 0;
+var caption = '';
+
+
+$(document).ready(function() {
+    setInterval ('cursorAnimation()', 600);
+    captionEl = $('#caption');
+    
+    $('#test-typing').click(function(){
+        testTypingEffect();
+    });
+
+    $('#test-erasing').click(function(){
+        testErasingEffect();
+    });
+});
+
+function testTypingEffect() {
+    caption = $('input#user-caption').val();
+    type();
+}
+
+function type() {
+    captionEl.html(caption.substr(0, captionLength++));
+    if(captionLength < caption.length+1) {
+        setTimeout('type()', 50);
+    } else {
+        captionLength = 0;
+        caption = '';
+    }
+}
+
+function testErasingEffect() {
+    caption = captionEl.html();
+    captionLength = caption.length;
+    if (captionLength>0) {
+        erase();
+    } else {
+        $('#caption').html("You didn't write anything to erase, but that's ok!");
+        setTimeout('testErasingEffect()', 1000);
+    }
+}
+
+function erase() {
+    captionEl.html(caption.substr(0, captionLength--));
+    if(captionLength >= 0) {
+        setTimeout('erase()', 50);
+    } else {
+        captionLength = 0;
+        caption = '';
+    }	
+}
+
+function cursorAnimation() {
+    $('#cursor').animate({
+        opacity: 0
+    }, 'fast', 'swing').animate({
+        opacity: 1
+    }, 'fast', 'swing');
+}
+</script>
+</head>
+<body>
 <h1>Hej igen</h1>
 
 
 Hej hoj
+<p>
+    <input type="text" id="user-caption" value="Type something here!" />
+    <input type="button" id="test-typing" value="Test Typing Effect" />
+    <input type="button" id="test-erasing" value="Test Erasing Effect" />  
+</p>
+<p class="console">
+    <span>C:\</span><span id="caption"></span><span id="cursor">|</span>
+</p>
+</body>
+</html>
