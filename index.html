@@ -8,7 +8,7 @@ body
 {
   background-color: #000;
   padding: 1%;
-  color: #ccc;
+  color: green;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 1em;
 }
@@ -33,7 +33,7 @@ var caption = '';
 $(document).ready(function() {
     setInterval ('cursorAnimation()', 600);
     captionEl = $('#caption');
-    
+    testTypingEffect();  
     $('#test-typing').click(function(){
         testTypingEffect();
     });
@@ -44,7 +44,8 @@ $(document).ready(function() {
 });
 
 function testTypingEffect() {
-    caption = $('input#user-caption').val();
+//    caption = $('input#user-caption').val();
+    caption = "Hack the planet";
     type();
 }
 
@@ -93,13 +94,8 @@ function cursorAnimation() {
 
 
 Hej hoj
-<p>
-    <input type="text" id="user-caption" value="Type something here!" />
-    <input type="button" id="test-typing" value="Test Typing Effect" />
-    <input type="button" id="test-erasing" value="Test Erasing Effect" />  
-</p>
 <p class="console">
-    <span>C:\</span><span id="caption"></span><span id="cursor">|</span>
+    <span> > </span><span id="caption"></span><span id="cursor">|</span>
 </p>
 </body>
 </html>
